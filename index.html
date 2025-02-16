@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number System Converter</title>
+
+    <!--js File-->
+    <script type="text/javascript" src="IndexScript.js" defer></script>
+
+    <!--css File-->
+    <link rel="stylesheet" href="IndexStyleSheet.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Number System Converter</h1>
+        
+        <!-- Display Section -->
+        <div class="display-section">
+            <div class="input-field">
+                <label for="binNum">Binary</label>
+                <input type="text" id="binNum" name="Binary" readonly>
+            </div>
+            <div class="input-field">
+                <label for="hexNum">Hexadecimal</label>
+                <input type="text" id="hexNum" name="Hexadecimal" readonly>
+            </div>
+            <div class="input-field">
+                <label for="octNum">Octal</label>
+                <input type="text" id="octNum" name="Octal" readonly>
+            </div>
+            <div class="input-field">
+                <label for="decNum">Decimal</label>
+                <input type="text" id="decNum" name="Decimal" readonly>
+            </div>
+        </div>
+
+        <!-- Number System Selection -->
+        <div class="number-systems">
+            <button class="system-btn" onclick="onBinary()">Binary</button>
+            <button class="system-btn" onclick="onHexadecimal()">Hexadecimal</button>
+            <button class="system-btn" onclick="onOctal()">Octal</button>
+            <button class="system-btn" onclick="onDecimal()">Decimal</button>
+        </div>
+
+        <!-- Keypad Section -->
+        <div class="keypad">
+            <!-- Numbers -->
+            <div class="numbers">
+                <button onclick="values(7)">7</button>
+                <button onclick="values(8)">8</button>
+                <button onclick="values(9)">9</button>
+                <button onclick="values(4)">4</button>
+                <button onclick="values(5)">5</button>
+                <button onclick="values(6)">6</button>
+                <button onclick="values(1)">1</button>
+                <button onclick="values(2)">2</button>
+                <button onclick="values(3)">3</button>
+                <button onclick="values(0)">0</button>
+            </div>
+
+            <!-- Hex Letters -->
+            <div class="hex-letters">
+                <button onclick="values('a')">A</button>
+                <button onclick="values('b')">B</button>
+                <button onclick="values('c')">C</button>
+                <button onclick="values('d')">D</button>
+                <button onclick="values('e')">E</button>
+                <button onclick="values('f')">F</button>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="controls">
+                <button class="clear" onClick="history.go(0)">Clear</button>
+                <button class="delete" onclick="del()">Delete</button>
+                <button class="equals" onclick="equal()">=</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

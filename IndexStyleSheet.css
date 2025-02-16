@@ -1,0 +1,206 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.calculator {
+    background-color: #333;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.display-section {
+    background-color: #444;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.input-field {
+    margin-bottom: 0.8rem;
+}
+
+.input-field:last-child {
+    margin-bottom: 0;
+}
+
+.input-field label {
+    display: block;
+    color: #fff;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.number-systems {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.system-btn {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #666;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.system-btn:hover {
+    background-color: #777;
+}
+
+.keypad {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.hex-letters {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+button {
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.numbers button {
+    background-color: #555;
+    color: white;
+}
+
+.hex-letters button {
+    background-color: #444;
+    color: white;
+}
+
+.controls button {
+    background-color: #666;
+    color: white;
+}
+
+.clear {
+    background-color: #ff4444 !important;
+}
+
+.delete {
+    background-color: #ff8800 !important;
+}
+
+.equals {
+    background-color: #00cc44 !important;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 480px) {
+    .calculator {
+        padding: 1rem;
+    }
+
+    .hex-letters {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    button {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .calculator {
+        padding: 0.8rem;
+    }
+
+    .number-systems {
+        grid-template-columns: 1fr;
+    }
+
+    button {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Add these to your existing CSS */
+button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.system-btn.active {
+    background-color: #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.numbers button:disabled,
+.hex-letters button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Optional: Add transition for smoother button state changes */
+button {
+    transition: all 0.3s ease;
+}

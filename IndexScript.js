@@ -8,6 +8,8 @@ window.onload = function() {
     clearInputs();
     disableAllInputs();
     enableNumberButtons(true); // Enable all number buttons by default
+	setActiveBase(10, "decNum");
+	updateButtonStates();
 };
 
 // Function to handle number and letter inputs
@@ -81,22 +83,49 @@ function onDecimal() {
     setActiveBase(10, "decNum");
 }
 
-// Set active base and update UI
 function setActiveBase(base, inputId) {
     currentBase = base;
     activeInput = inputId;
     currentInput = "";
     clearInputs();
     updateButtonStates();
-    highlightActiveSystem();
+    
+    // Remove active class from all system buttons
+    const systemButtons = document.querySelectorAll('.system-btn');
+    systemButtons.forEach(btn => btn.classList.remove('active'));
+    
+    // Add active class to the selected system button
+    let activeButton;
+    switch(base) {
+        case 2:
+            activeButton = 'Binary';
+            break;
+        case 8:
+            activeButton = 'Octal';
+            break;
+        case 16:
+            activeButton = 'Hexadecimal';
+            break;
+        case 10:
+            activeButton = 'Decimal';
+            break;
+    }
+    
+    // Find and highlight the active button
+    const buttons = document.querySelectorAll('.system-btn');
+    buttons.forEach(btn => {
+        if (btn.textContent === activeButton) {
+            btn.classList.add('active');
+        }
+    });
 }
 
 // Update which number buttons are enabled based on current base
 function updateButtonStates() {
-    const numbers = document.querySelectorAll('.numbers button');
+	const numbers = document.querySelectorAll('.numbers button');
     const hexLetters = document.querySelectorAll('.hex-letters button');
     
-    // Disable all buttons first
+    // First disable all buttons
     numbers.forEach(btn => {
         btn.disabled = true;
         btn.classList.add('disabled');
@@ -107,26 +136,43 @@ function updateButtonStates() {
         btn.classList.add('disabled');
     });
 
-    // Enable appropriate buttons based on current base
-    numbers.forEach(btn => {
-        const num = parseInt(btn.textContent);
-        if (
-            (currentBase === 2 && num <= 1) ||
-            (currentBase === 8 && num <= 7) ||
-            (currentBase === 10) ||
-            (currentBase === 16)
-        ) {
-            btn.disabled = false;
-            btn.classList.remove('disabled');
-        }
-    });
-
-    // Enable hex letters only for hex mode
-    if (currentBase === 16) {
-        hexLetters.forEach(btn => {
-            btn.disabled = false;
-            btn.classList.remove('disabled');
-        });
+    // Enable buttons based on current base
+    switch(currentBase) {
+        case 2: // Binary
+            numbers.forEach(btn => {
+                if (parseInt(btn.textContent) <= 1) {
+                    btn.disabled = false;
+                    btn.classList.remove('disabled');
+                }
+            });
+            break;
+            
+        case 8: // Octal
+            numbers.forEach(btn => {
+                if (parseInt(btn.textContent) <= 7) {
+                    btn.disabled = false;
+                    btn.classList.remove('disabled');
+                }
+            });
+            break;
+            
+        case 10: // Decimal
+            numbers.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+            });
+            break;
+            
+        case 16: // Hexadecimal
+            numbers.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+            });
+            hexLetters.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+            });
+            break;
     }
 }
 
@@ -182,10 +228,11 @@ function disableAllInputs() {
 function del() {
     currentInput = currentInput.slice(0, -1);
     updateActiveInput();
-    convertAndDisplay();
-}
-
-// Equal button function
-function equal() {
-    convertAndDisplay();
+    
+    // Check if input is empty after deletion
+    if (currentInput === "") {
+        clearInputs(); // Clear all fields if input is empty
+    } else {
+        convertAndDisplay(); // Otherwise convert remaining numbers
+    }
 }
